@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
-// ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
+// âââ DESIGN TOKENS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const C = {
   primary:   "#EA580C",
   primary2:  "#F97316",
@@ -15,7 +15,7 @@ const C = {
   blue:      "#2563EB",
 };
 
-// ─── STORAGE (IndexedDB simulado com localStorage) ────────────────────────────
+// âââ STORAGE (IndexedDB simulado com localStorage) ââââââââââââââââââââââââââââ
 const DB = {
   get: (key) => { try { return JSON.parse(localStorage.getItem(key) || "null"); } catch { return null; } },
   set: (key, val) => localStorage.setItem(key, JSON.stringify(val)),
@@ -26,7 +26,7 @@ const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2);
 const fmt = (v) => Number(v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const fmtN = (v) => Number(v || 0).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
 
-// ─── GLOBAL STYLES ────────────────────────────────────────────────────────────
+// âââ GLOBAL STYLES ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const globalStyle = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +39,7 @@ const globalStyle = `
   @keyframes fade { from { opacity:0; } to { opacity:1; } }
 `;
 
-// ─── COMPONENTS ───────────────────────────────────────────────────────────────
+// âââ COMPONENTS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const Btn = ({ children, onClick, color = "primary", size = "md", full, outline, disabled, style: s }) => {
   const base = {
     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
@@ -122,7 +122,7 @@ const Modal = ({ title, onClose, children, wide }) => (
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
         <h3 style={{ fontSize: 17, fontWeight: 700 }}>{title}</h3>
-        <button onClick={onClose} style={{ background: C.grayLight, border: "none", borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 18 }}>✕</button>
+        <button onClick={onClose} style={{ background: C.grayLight, border: "none", borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 18 }}>â</button>
       </div>
       {children}
     </div>
@@ -144,7 +144,7 @@ const EmptyState = ({ icon, text, action }) => (
   </div>
 );
 
-// ─── CROQUI SVG ───────────────────────────────────────────────────────────────
+// âââ CROQUI SVG âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
   const W = 280, H = 200, pad = 30, fw = 8;
   const iW = W - pad * 2, iH = H - pad * 2;
@@ -229,9 +229,9 @@ const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
       <rect x={pad} y={pad} width={iW} height={iH} fill="rgba(186,230,253,.3)" stroke={C.primary} strokeWidth={fw} rx={2} />
       <rect x={pad + fw / 2} y={pad + fw / 2} width={(iW - fw) / 2} height={iH - fw} fill="rgba(186,230,253,.5)" stroke="#93C5FD" strokeWidth={1.5} />
       <rect x={W / 2} y={pad + fw / 2} width={(iW - fw) / 2} height={iH - fw} fill="rgba(186,230,253,.3)" stroke="#93C5FD" strokeWidth={1.5} />
-      <text x={W / 2 - iW / 4} y={H / 2 + 5} textAnchor="middle" fontSize={13} fill={C.primary} fontWeight="bold">→</text>
-      <text x={W / 2 + iW / 4} y={H / 2 + 5} textAnchor="middle" fontSize={13} fill={C.primary} fontWeight="bold">←</text>
-      <text x={W / 2} y={H - 4} textAnchor="middle" fontSize={9} fill={C.gray}>{largura || "0"} × {altura || "0"} m</text>
+      <text x={W / 2 - iW / 4} y={H / 2 + 5} textAnchor="middle" fontSize={13} fill={C.primary} fontWeight="bold">â</text>
+      <text x={W / 2 + iW / 4} y={H / 2 + 5} textAnchor="middle" fontSize={13} fill={C.primary} fontWeight="bold">â</text>
+      <text x={W / 2} y={H - 4} textAnchor="middle" fontSize={9} fill={C.gray}>{largura || "0"} Ã {altura || "0"} m</text>
     </g>
   );
 
@@ -244,7 +244,7 @@ const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
       </defs>
       <rect width={W} height={H} fill="#F9FAFB" rx={8} />
       <text x={W / 2} y={14} textAnchor="middle" fontSize={10} fill={C.primary} fontWeight="700" textTransform="uppercase">
-        {tipo?.toUpperCase()} — {numFolhas} FOLHA{numFolhas > 1 ? "S" : ""} {cor ? `• ${cor}` : ""}
+        {tipo?.toUpperCase()} â {numFolhas} FOLHA{numFolhas > 1 ? "S" : ""} {cor ? `â¢ ${cor}` : ""}
       </text>
       {tipo === "Porta" && renderPorta()}
       {tipo === "Janela" && renderJanela()}
@@ -255,11 +255,11 @@ const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
   );
 };
 
-// ─── STATUS BADGE ─────────────────────────────────────────────────────────────
+// âââ STATUS BADGE âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const statusColor = { "Or\u00e7amento": "primary", "Aprovado": "blue", "Em execu\u00e7\u00e3o": "blue", "Conclu\u00eddo": "green", "Cancelado": "red" };
 const StatusBadge = ({ s }) => <Badge color={statusColor[s] || "primary"}>{s}</Badge>;
 
-// ─── TELA: CONFIGURAÇÕES ──────────────────────────────────────────────────────
+// âââ TELA: CONFIGURAÃÃES ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const Configuracoes = () => {
   const saved = DB.get("config") || {};
   const [cfg, setCfg] = useState({
@@ -286,7 +286,7 @@ const Configuracoes = () => {
   return (
     <div className="slide-in" style={{ padding: "0 0 80px" }}>
       <div style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, padding: "24px 20px 20px", color: C.white, marginBottom: 20 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800 }}>⚙️ Configurações</h1>
+        <h1 style={{ fontSize: 22, fontWeight: 800 }}>âï¸ ConfiguraÃ§Ãµes</h1>
         <p style={{ fontSize: 13, opacity: .85, marginTop: 4 }}>Dados da sua empresa</p>
       </div>
       <div style={{ padding: "0 16px", display: "flex", flexDirection: "column", gap: 12 }}>
@@ -298,35 +298,35 @@ const Configuracoes = () => {
               display: "flex", alignItems: "center", justifyContent: "center",
               background: C.grayLight, overflow: "hidden", flexShrink: 0,
             }}>
-              {cfg.logo ? <img src={cfg.logo} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="logo" /> : <span style={{ fontSize: 28 }}>🏢</span>}
+              {cfg.logo ? <img src={cfg.logo} style={{ width: "100%", height: "100%", objectFit: "contain" }} alt="logo" /> : <span style={{ fontSize: 28 }}>ð¢</span>}
             </div>
             <div>
-              <Btn size="sm" color="gray" onClick={() => logoRef.current.click()}>📷 Escolher logo</Btn>
+              <Btn size="sm" color="gray" onClick={() => logoRef.current.click()}>ð· Escolher logo</Btn>
               {cfg.logo && <Btn size="sm" color="red" onClick={() => setCfg(c => ({ ...c, logo: "" }))} style={{ marginLeft: 8 }}>Remover</Btn>}
               <input ref={logoRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleLogo} />
             </div>
           </div>
         </Card>
         <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <Input label="Nome da Empresa" value={cfg.empresa} onChange={v => setCfg(c => ({ ...c, empresa: v }))} placeholder="Ex: Vidraçaria do João" required />
-          <Input label="Endereço" value={cfg.endereco} onChange={v => setCfg(c => ({ ...c, endereco: v }))} placeholder="Rua, nº, Bairro - Cidade/UF" />
+          <Input label="Nome da Empresa" value={cfg.empresa} onChange={v => setCfg(c => ({ ...c, empresa: v }))} placeholder="Ex: VidraÃ§aria do JoÃ£o" required />
+          <Input label="EndereÃ§o" value={cfg.endereco} onChange={v => setCfg(c => ({ ...c, endereco: v }))} placeholder="Rua, nÂº, Bairro - Cidade/UF" />
           <Input label="Celular / WhatsApp" value={cfg.celular} onChange={v => setCfg(c => ({ ...c, celular: v }))} placeholder="(11) 99999-9999" />
-          <Input label="% Comissão do Instalador" value={cfg.percentInstalador} onChange={v => setCfg(c => ({ ...c, percentInstalador: v }))} type="number" suffix="%" />
+          <Input label="% ComissÃ£o do Instalador" value={cfg.percentInstalador} onChange={v => setCfg(c => ({ ...c, percentInstalador: v }))} type="number" suffix="%" />
         </Card>
         <Card>
-          <p style={{ fontSize: 12, fontWeight: 600, color: C.gray, textTransform: "uppercase", letterSpacing: .5, marginBottom: 6 }}>Versículo Bíblico</p>
+          <p style={{ fontSize: 12, fontWeight: 600, color: C.gray, textTransform: "uppercase", letterSpacing: .5, marginBottom: 6 }}>VersÃ­culo BÃ­blico</p>
           <textarea value={cfg.versiculo} onChange={e => setCfg(c => ({ ...c, versiculo: e.target.value }))}
             style={{ width: "100%", border: `1.5px solid ${C.grayBorder}`, borderRadius: 8, padding: 10, fontSize: 14, resize: "vertical", minHeight: 70, fontFamily: "Inter", fontStyle: "italic" }} />
         </Card>
         <Btn full size="lg" onClick={save} color={saved2 ? "green" : "primary"}>
-          {saved2 ? "✓ Salvo!" : "💾 Salvar Configurações"}
+          {saved2 ? "â Salvo!" : "ð¾ Salvar ConfiguraÃ§Ãµes"}
         </Btn>
       </div>
     </div>
   );
 };
 
-// ─── TELA: CLIENTES ───────────────────────────────────────────────────────────
+// âââ TELA: CLIENTES âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const Clientes = ({ setPage, setClienteSel }) => {
   const [clientes, setClientes] = useState(DB.getAll("clientes"));
   const [busca, setBusca] = useState("");
@@ -368,7 +368,7 @@ const Clientes = ({ setPage, setClienteSel }) => {
       <div style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, padding: "24px 20px 20px", color: C.white, marginBottom: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 800 }}>👥 Clientes</h1>
+            <h1 style={{ fontSize: 22, fontWeight: 800 }}>ð¥ Clientes</h1>
             <p style={{ fontSize: 13, opacity: .85, marginTop: 4 }}>{clientes.length} cadastrado{clientes.length !== 1 ? "s" : ""}</p>
           </div>
           <button onClick={() => { setForm({ nome: "", telefone: "", endereco: "", obs: "" }); setEditId(null); setModal(true); }}
@@ -376,10 +376,10 @@ const Clientes = ({ setPage, setClienteSel }) => {
         </div>
       </div>
       <div style={{ padding: "0 16px", display: "flex", flexDirection: "column", gap: 10 }}>
-        <input value={busca} onChange={e => setBusca(e.target.value)} placeholder="🔍 Buscar por nome ou telefone..."
+        <input value={busca} onChange={e => setBusca(e.target.value)} placeholder="ð Buscar por nome ou telefone..."
           style={{ padding: "11px 14px", borderRadius: 10, border: `1.5px solid ${C.grayBorder}`, fontSize: 14, background: C.white }} />
         {filtrados.length === 0 ? (
-          <EmptyState icon="👥" text="Nenhum cliente cadastrado ainda." action={<Btn onClick={() => setModal(true)}>+ Novo Cliente</Btn>} />
+          <EmptyState icon="ð¥" text="Nenhum cliente cadastrado ainda." action={<Btn onClick={() => setModal(true)}>+ Novo Cliente</Btn>} />
         ) : filtrados.map(c => (
           <Card key={c.id} style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 44, height: 44, borderRadius: "50%", background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, display: "flex", alignItems: "center", justifyContent: "center", color: C.white, fontSize: 18, fontWeight: 700, flexShrink: 0 }}>
@@ -388,13 +388,13 @@ const Clientes = ({ setPage, setClienteSel }) => {
             <div style={{ flex: 1 }}>
               <p style={{ fontWeight: 700, fontSize: 15 }}>{c.nome}</p>
               {c.telefone && <p style={{ fontSize: 13, color: C.gray }}>{c.telefone}</p>}
-              <p style={{ fontSize: 12, color: C.primary, marginTop: 2 }}>{orcamentosCliente(c.id)} orçamento{orcamentosCliente(c.id) !== 1 ? "s" : ""}</p>
+              <p style={{ fontSize: 12, color: C.primary, marginTop: 2 }}>{orcamentosCliente(c.id)} orÃ§amento{orcamentosCliente(c.id) !== 1 ? "s" : ""}</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {c.telefone && <a href={`https://wa.me/55${c.telefone.replace(/\D/g, "")}`} target="_blank" rel="noreferrer"
-                style={{ fontSize: 20, textDecoration: "none" }}>💬</a>}
-              <button onClick={() => abrir(c)} style={{ background: "none", border: "none", fontSize: 18, cursor: "pointer" }}>✏️</button>
-              <button onClick={() => del(c.id)} style={{ background: "none", border: "none", fontSize: 18, cursor: "pointer" }}>🗑️</button>
+                style={{ fontSize: 20, textDecoration: "none" }}>ð¬</a>}
+              <button onClick={() => abrir(c)} style={{ background: "none", border: "none", fontSize: 18, cursor: "pointer" }}>âï¸</button>
+              <button onClick={() => del(c.id)} style={{ background: "none", border: "none", fontSize: 18, cursor: "pointer" }}>ðï¸</button>
             </div>
           </Card>
         ))}
@@ -404,9 +404,9 @@ const Clientes = ({ setPage, setClienteSel }) => {
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <Input label="Nome" value={form.nome} onChange={v => setForm(f => ({ ...f, nome: v }))} required />
             <Input label="Telefone / WhatsApp" value={form.telefone} onChange={v => setForm(f => ({ ...f, telefone: v }))} placeholder="(11) 99999-9999" />
-            <Input label="Endereço" value={form.endereco} onChange={v => setForm(f => ({ ...f, endereco: v }))} />
+            <Input label="EndereÃ§o" value={form.endereco} onChange={v => setForm(f => ({ ...f, endereco: v }))} />
             <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-              <label style={{ fontSize: 12, fontWeight: 600, color: C.gray, textTransform: "uppercase" }}>Observações</label>
+              <label style={{ fontSize: 12, fontWeight: 600, color: C.gray, textTransform: "uppercase" }}>ObservaÃ§Ãµes</label>
               <textarea value={form.obs} onChange={e => setForm(f => ({ ...f, obs: e.target.value }))}
                 style={{ padding: 10, borderRadius: 8, border: `1.5px solid ${C.grayBorder}`, fontSize: 14, resize: "vertical", minHeight: 70, fontFamily: "Inter" }} />
             </div>
@@ -421,11 +421,11 @@ const Clientes = ({ setPage, setClienteSel }) => {
   );
 };
 
-// ─── TELA: ORÇAMENTOS ─────────────────────────────────────────────────────────
-const TIPOS = ["Porta", "Janela", "Corrimão", "Box", "Fachada", "Guarda-corpo", "Outro"];
+// âââ TELA: ORÃAMENTOS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+const TIPOS = ["Porta", "Janela", "CorrimÃ£o", "Box", "Fachada", "Guarda-corpo", "Outro"];
 const FOLHAS = ["1", "2", "3", "4"];
 const CORES_AL = ["Natural", "Branco", "Bronze", "Preto", "Champagne", "Anodizado", "Personalizado"];
-const VIDROS = ["Comum", "Temperado", "Laminado", "Espelho", "Jateado", "Fumê", "Personalizado"];
+const VIDROS = ["Comum", "Temperado", "Laminado", "Espelho", "Jateado", "FumÃª", "Personalizado"];
 const ESPESSURAS = ["4mm", "6mm", "8mm", "10mm", "12mm"];
 const STATUS_OPTS = ["Or\u00e7amento", "Aprovado", "Em execu\u00e7\u00e3o", "Conclu\u00eddo", "Cancelado"];
 
@@ -477,16 +477,16 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
 
   const remMat = (id) => setO(x => ({ ...x, materiais: x.materiais.filter(m => m.id !== id) }));
 
-  const tabs = ["📋 Dados", "📐 Medidas", "🧱 Materiais", "💰 Valores"];
+  const tabs = ["ð Dados", "ð Medidas", "ð§± Materiais", "ð° Valores"];
 
   return (
     <div style={{ padding: "0 0 80px" }}>
       <div style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, padding: "20px 16px", color: C.white }}>
         <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 12 }}>
-          <button onClick={onCancel} style={{ background: "rgba(255,255,255,.2)", border: "none", color: C.white, borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 16 }}>←</button>
+          <button onClick={onCancel} style={{ background: "rgba(255,255,255,.2)", border: "none", color: C.white, borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 16 }}>â</button>
           <div>
-            <h2 style={{ fontSize: 18, fontWeight: 800 }}>{inicial ? "Editar" : "Novo"} Orçamento</h2>
-            <p style={{ fontSize: 12, opacity: .8 }}>Nº {o.numero}</p>
+            <h2 style={{ fontSize: 18, fontWeight: 800 }}>{inicial ? "Editar" : "Novo"} OrÃ§amento</h2>
+            <p style={{ fontSize: 12, opacity: .8 }}>NÂº {o.numero}</p>
           </div>
         </div>
         <div style={{ display: "flex", gap: 4, overflowX: "auto" }}>
@@ -506,20 +506,20 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 <Input label="Nome do Cliente" value={o.clienteNome} onChange={v => setO(x => ({ ...x, clienteNome: v }))} required />
                 <Input label="Telefone" value={o.clienteTel} onChange={v => setO(x => ({ ...x, clienteTel: v }))} placeholder="(11) 99999-9999" />
-                <Input label="Endereço da Obra" value={o.obraEndereco} onChange={v => setO(x => ({ ...x, obraEndereco: v }))} />
+                <Input label="EndereÃ§o da Obra" value={o.obraEndereco} onChange={v => setO(x => ({ ...x, obraEndereco: v }))} />
                 <Select label="Status" value={o.status} onChange={v => setO(x => ({ ...x, status: v }))} options={STATUS_OPTS.map(s => ({ value: s, label: s }))} />
               </div>
             </Card>
             <div style={{ display: "flex", gap: 8 }}>
               <Btn full color="gray" onClick={onCancel}>Cancelar</Btn>
-              <Btn full onClick={() => setTab(1)}>Próximo →</Btn>
+              <Btn full onClick={() => setTab(1)}>PrÃ³ximo â</Btn>
             </div>
           </div>
         )}
         {tab === 1 && (
           <div className="slide-in" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>TIPO DE PEÇA</p>
+              <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>TIPO DE PEÃA</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {TIPOS.map(t => (
                   <button key={t} onClick={() => setO(x => ({ ...x, tipo: t }))} style={{
@@ -530,7 +530,7 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
                 ))}
               </div>
             </Card>
-            {!["Corrimão", "Fachada"].includes(o.tipo) && (
+            {!["CorrimÃ£o", "Fachada"].includes(o.tipo) && (
               <Card>
                 <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, marginBottom: 10 }}>FOLHAS</p>
                 <div style={{ display: "flex", gap: 8 }}>
@@ -545,7 +545,7 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
               </Card>
             )}
             <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>DIMENSÕES</p>
+              <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>DIMENSÃES</p>
               <div style={{ display: "flex", gap: 10 }}>
                 <Input label="Largura" value={o.largura} onChange={v => setO(x => ({ ...x, largura: v }))} type="number" suffix="m" />
                 <Input label="Altura" value={o.altura} onChange={v => setO(x => ({ ...x, altura: v }))} type="number" suffix="m" />
@@ -553,7 +553,7 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
             </Card>
             <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>MATERIAL</p>
-              <Select label="Cor do Alumínio" value={o.corAl} onChange={v => setO(x => ({ ...x, corAl: v }))} options={CORES_AL.map(c => ({ value: c, label: c }))} />
+              <Select label="Cor do AlumÃ­nio" value={o.corAl} onChange={v => setO(x => ({ ...x, corAl: v }))} options={CORES_AL.map(c => ({ value: c, label: c }))} />
               <div style={{ display: "flex", gap: 10 }}>
                 <Select label="Tipo de Vidro" value={o.tipoVidro} onChange={v => setO(x => ({ ...x, tipoVidro: v }))} options={VIDROS.map(c => ({ value: c, label: c }))} />
                 <Select label="Espessura" value={o.espVidro} onChange={v => setO(x => ({ ...x, espVidro: v }))} options={ESPESSURAS.map(c => ({ value: c, label: c }))} />
@@ -566,13 +566,13 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
                   <Croqui tipo={o.tipo} folhas={o.folhas} largura={o.largura} altura={o.altura} cor={o.corAl} vidro={o.tipoVidro} />
                 </div>
                 <p style={{ fontSize: 11, color: C.gray, textAlign: "center", marginTop: 6 }}>
-                  {o.tipo} {o.folhas}F • {o.largura || "?"}m × {o.altura || "?"}m • Al. {o.corAl} • Vidro {o.tipoVidro} {o.espVidro}
+                  {o.tipo} {o.folhas}F â¢ {o.largura || "?"}m Ã {o.altura || "?"}m â¢ Al. {o.corAl} â¢ Vidro {o.tipoVidro} {o.espVidro}
                 </p>
               </Card>
             )}
             <div style={{ display: "flex", gap: 8 }}>
-              <Btn full color="gray" onClick={() => setTab(0)}>← Voltar</Btn>
-              <Btn full onClick={() => setTab(2)}>Próximo →</Btn>
+              <Btn full color="gray" onClick={() => setTab(0)}>â Voltar</Btn>
+              <Btn full onClick={() => setTab(2)}>PrÃ³ximo â</Btn>
             </div>
           </div>
         )}
@@ -581,7 +581,7 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
             <Card>
               <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, marginBottom: 10 }}>ADICIONAR MATERIAL</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <Input label="Nome do produto" value={matNome} onChange={setMatNome} placeholder="Ex: Perfil de alumínio 3m" />
+                <Input label="Nome do produto" value={matNome} onChange={setMatNome} placeholder="Ex: Perfil de alumÃ­nio 3m" />
                 <div style={{ display: "flex", gap: 8 }}>
                   <Input label="Qtd" value={matQtd} onChange={setMatQtd} type="number" />
                   <Input label="Valor unit. (R$)" value={matVlr} onChange={setMatVlr} type="number" />
@@ -600,10 +600,10 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
                     <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 0", borderBottom: `1px solid ${C.grayBorder}` }}>
                       <div style={{ flex: 1 }}>
                         <p style={{ fontSize: 14, fontWeight: 600 }}>{m.nome}</p>
-                        <p style={{ fontSize: 12, color: C.gray }}>{m.qtd} × {fmt(m.vlr)}</p>
+                        <p style={{ fontSize: 12, color: C.gray }}>{m.qtd} Ã {fmt(m.vlr)}</p>
                       </div>
                       <p style={{ fontWeight: 700, color: C.primary }}>{fmt(m.total)}</p>
-                      <button onClick={() => remMat(m.id)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 16, color: C.red }}>✕</button>
+                      <button onClick={() => remMat(m.id)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 16, color: C.red }}>â</button>
                     </div>
                   ))}
                   <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 6 }}>
@@ -614,15 +614,15 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
               </Card>
             )}
             <div style={{ display: "flex", gap: 8 }}>
-              <Btn full color="gray" onClick={() => setTab(1)}>← Voltar</Btn>
-              <Btn full onClick={() => setTab(3)}>Próximo →</Btn>
+              <Btn full color="gray" onClick={() => setTab(1)}>â Voltar</Btn>
+              <Btn full onClick={() => setTab(3)}>PrÃ³ximo â</Btn>
             </div>
           </div>
         )}
         {tab === 3 && (
           <div className="slide-in" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>MÃO DE OBRA</p>
+              <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>MÃO DE OBRA</p>
               <div style={{ display: "flex", gap: 8, marginBottom: 4 }}>
                 <button onClick={() => setO(x => ({ ...x, moDeObraPercent: false }))} style={{
                   flex: 1, padding: "8px", borderRadius: 8, border: `2px solid ${!o.moDeObraPercent ? C.primary : C.grayBorder}`,
@@ -633,15 +633,15 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
                   background: o.moDeObraPercent ? C.primary3 : C.white, color: o.moDeObraPercent ? C.primary : C.dark, cursor: "pointer", fontWeight: 600, fontSize: 13,
                 }}>Percentual (%)</button>
               </div>
-              <Input label={o.moDeObraPercent ? "Percentual da mão de obra" : "Valor da mão de obra"} value={o.moDeObra} onChange={v => setO(x => ({ ...x, moDeObra: v }))} type="number" suffix={o.moDeObraPercent ? "%" : "R$"} />
-              <Input label="% Comissão do Instalador" value={o.percentInstalador} onChange={v => setO(x => ({ ...x, percentInstalador: v }))} type="number" suffix="%" />
+              <Input label={o.moDeObraPercent ? "Percentual da mÃ£o de obra" : "Valor da mÃ£o de obra"} value={o.moDeObra} onChange={v => setO(x => ({ ...x, moDeObra: v }))} type="number" suffix={o.moDeObraPercent ? "%" : "R$"} />
+              <Input label="% ComissÃ£o do Instalador" value={o.percentInstalador} onChange={v => setO(x => ({ ...x, percentInstalador: v }))} type="number" suffix="%" />
             </Card>
             <Card style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, color: C.white }}>
-              <p style={{ fontSize: 12, fontWeight: 700, opacity: .8, marginBottom: 12 }}>RESUMO DO ORÇAMENTO</p>
+              <p style={{ fontSize: 12, fontWeight: 700, opacity: .8, marginBottom: 12 }}>RESUMO DO ORÃAMENTO</p>
               {[
                 ["Total de materiais", fmt(totalMat)],
-                ["Mão de obra", fmt(moValor)],
-                ["Comissão do instalador", fmt(valorInstalador)],
+                ["MÃ£o de obra", fmt(moValor)],
+                ["ComissÃ£o do instalador", fmt(valorInstalador)],
               ].map(([k, v]) => (
                 <div key={k} style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
                   <span style={{ opacity: .85, fontSize: 14 }}>{k}</span>
@@ -658,19 +658,178 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
               </div>
             </Card>
             <Card>
-              <p style={{ fontSize: 12, fontWeight: 600, color: C.gray, textTransform: "uppercase", letterSpacing: .5, marginBottom: 6 }}>Observações</p>
+              <p style={{ fontSize: 12, fontWeight: 600, color: C.gray, textTransform: "uppercase", letterSpacing: .5, marginBottom: 6 }}>ObservaÃ§Ãµes</p>
               <textarea value={o.obs} onChange={e => setO(x => ({ ...x, obs: e.target.value }))}
                 style={{ width: "100%", border: `1.5px solid ${C.grayBorder}`, borderRadius: 8, padding: 10, fontSize: 14, resize: "vertical", minHeight: 60, fontFamily: "Inter" }} />
             </Card>
             <div style={{ display: "flex", gap: 8 }}>
-              <Btn full color="gray" onClick={() => setTab(2)}>← Voltar</Btn>
-              <Btn full color="green" onClick={() => onSave(o, totalMat, moValor, totalGeral, valorInstalador)}>✓ Salvar Orçamento</Btn>
+              <Btn full color="gray" onClick={() => setTab(2)}>â Voltar</Btn>
+              <Btn full color="green" onClick={() => onSave(o, totalMat, moValor, totalGeral, valorInstalador)}>â Salvar OrÃ§amento</Btn>
             </div>
           </div>
         )}
       </div>
     </div>
   );
+};
+
+
+// ─── FUNÇÃO: GERAR PDF DO ORÇAMENTO ──────────────────────────────────────────
+const gerarPDF = (o, cfg) => {
+  const fmtLocal = (v) => Number(v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  const dataHoje = new Date().toLocaleDateString("pt-BR");
+  
+  const logoHtml = cfg.logo
+    ? `<img src="${cfg.logo}" style="width:70px;height:70px;object-fit:contain;border-radius:10px;background:#fff;padding:4px;" alt="Logo" />`
+    : `<div style="width:70px;height:70px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:36px;">🪟</div>`;
+
+  const materiaisHtml = (o.materiais && o.materiais.length > 0)
+    ? (`<table style="width:100%;border-collapse:collapse;margin-top:6px;">
+        <thead>
+          <tr style="background:#FEF3C7;">
+            <th style="padding:8px 10px;text-align:left;font-size:12px;color:#78716C;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Material</th>
+            <th style="padding:8px 10px;text-align:center;font-size:12px;color:#78716C;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Qtd</th>
+            <th style="padding:8px 10px;text-align:right;font-size:12px;color:#78716C;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Total</th>
+          </tr>
+        </thead>
+        <tbody>` +
+      o.materiais.map((m, i) =>
+        `<tr style="background:${i % 2 === 0 ? "#fff" : "#FAFAF9"};">
+          <td style="padding:8px 10px;font-size:13px;border-bottom:1px solid #E7E5E4;">${m.nome}</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:center;border-bottom:1px solid #E7E5E4;">${m.qtd}x</td>
+          <td style="padding:8px 10px;font-size:13px;text-align:right;font-weight:600;border-bottom:1px solid #E7E5E4;">${fmtLocal(m.total)}</td>
+        </tr>`
+      ).join("") +
+      `</tbody></table>`)
+    : '<p style="color:#78716C;font-size:13px;padding:8px 0;">Nenhum material informado.</p>';
+
+  const versiculoHtml = cfg.versiculo
+    ? `<div style="margin-top:20px;padding:14px 18px;border-left:4px solid #EA580C;background:#FFF7ED;border-radius:0 8px 8px 0;">
+        <p style="font-size:12px;color:#EA580C;font-style:italic;line-height:1.6;">"${cfg.versiculo}"</p>
+      </div>`
+    : "";
+
+  const instaladorHtml = Number(o.valorInstalador) > 0
+    ? `<div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:14px;color:rgba(255,255,255,.85);">Comissão instalador</p>
+        <p style="font-size:14px;font-weight:700;color:white;">${fmtLocal(o.valorInstalador)}</p>
+      </div>`
+    : "";
+
+  const enderecoHtml = o.obraEndereco
+    ? `<div style="grid-column:1/-1;">
+        <p style="font-size:10px;color:#78716C;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;">Endereço da Obra</p>
+        <p style="font-size:13px;color:#1C1917;">${o.obraEndereco}</p>
+      </div>`
+    : "";
+
+  const telHtml = o.clienteTel
+    ? `<div>
+        <p style="font-size:10px;color:#78716C;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;">Telefone</p>
+        <p style="font-size:14px;font-weight:600;color:#1C1917;">${o.clienteTel}</p>
+      </div>`
+    : "<div></div>";
+
+  const statusColor = o.status === "Aprovado" ? "#16A34A" : o.status === "Recusado" ? "#DC2626" : "#2563EB";
+  const statusBg = o.status === "Aprovado" ? "#DCFCE7" : o.status === "Recusado" ? "#FEE2E2" : "#DBEAFE";
+
+  const html = "<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\" />"
+    + "<title>Orçamento #" + o.numero + " - " + o.clienteNome + "</title>"
+    + "<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');"
+    + "* { box-sizing: border-box; margin: 0; padding: 0; }"
+    + "body { font-family: 'Inter', Arial, sans-serif; background: #fff; color: #1C1917; font-size: 14px; }"
+    + "@media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .no-print { display: none !important; } @page { margin: 12mm 14mm; } }"
+    + "</style></head><body style=\"padding:0;max-width:800px;margin:0 auto;\">"
+
+    // CABEÇALHO
+    + "<div style=\"background:linear-gradient(135deg,#EA580C 0%,#F97316 60%,#FB923C 100%);padding:28px 32px;color:white;position:relative;overflow:hidden;\">"
+    + "<div style=\"position:absolute;top:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08);\"></div>"
+    + "<div style=\"position:absolute;bottom:-40px;right:60px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06);\"></div>"
+    + "<div style=\"display:flex;align-items:center;gap:20px;position:relative;\">"
+    + logoHtml
+    + "<div style=\"flex:1;\">"
+    + "<h1 style=\"font-size:26px;font-weight:800;line-height:1.15;letter-spacing:-.3px;\">" + (cfg.empresa || "VidraçaPro") + "</h1>"
+    + (cfg.cnpj ? "<p style=\"font-size:11px;opacity:.75;margin-top:2px;\">CNPJ: " + cfg.cnpj + "</p>" : "")
+    + (cfg.endereco ? "<p style=\"font-size:12px;opacity:.85;margin-top:4px;\">📍 " + cfg.endereco + "</p>" : "")
+    + (cfg.celular ? "<p style=\"font-size:13px;opacity:.95;margin-top:4px;font-weight:700;\">📱 " + cfg.celular + "</p>" : "")
+    + "</div>"
+    + "<div style=\"text-align:right;\">"
+    + "<div style=\"background:rgba(255,255,255,.2);border-radius:12px;padding:12px 18px;\">"
+    + "<p style=\"font-size:10px;opacity:.8;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;\">Orçamento</p>"
+    + "<p style=\"font-size:28px;font-weight:800;line-height:1;\">#" + o.numero + "</p>"
+    + "<p style=\"font-size:11px;opacity:.75;margin-top:6px;\">" + dataHoje + "</p>"
+    + "</div></div></div></div>"
+
+    // BARRA DE DETALHES DO SERVIÇO
+    + "<div style=\"display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:#FFF7ED;border-bottom:2px solid #FED7AA;\">"
+    + "<div style=\"display:flex;gap:28px;\">"
+    + "<div><p style=\"font-size:10px;color:#78716C;font-weight:700;text-transform:uppercase;letter-spacing:.5px;\">Tipo de Serviço</p>"
+    + "<p style=\"font-size:14px;font-weight:700;color:#1C1917;margin-top:3px;\">" + o.tipo + " " + o.folhas + "F</p></div>"
+    + "<div><p style=\"font-size:10px;color:#78716C;font-weight:700;text-transform:uppercase;letter-spacing:.5px;\">Dimensões</p>"
+    + "<p style=\"font-size:14px;font-weight:700;color:#1C1917;margin-top:3px;\">" + o.largura + "m × " + o.altura + "m</p></div>"
+    + "<div><p style=\"font-size:10px;color:#78716C;font-weight:700;text-transform:uppercase;letter-spacing:.5px;\">Perfil / Vidro</p>"
+    + "<p style=\"font-size:14px;font-weight:700;color:#1C1917;margin-top:3px;\">Al. " + o.corAl + " · " + o.tipoVidro + " " + o.espVidro + "</p></div>"
+    + "</div>"
+    + "<div style=\"background:" + statusBg + ";border-radius:20px;padding:6px 16px;\">"
+    + "<p style=\"font-size:12px;font-weight:700;color:" + statusColor + ";\">" + (o.status || "Em aberto") + "</p>"
+    + "</div></div>"
+
+    // CONTEÚDO PRINCIPAL
+    + "<div style=\"padding:24px 32px;display:flex;flex-direction:column;gap:20px;\">"
+
+    // CLIENTE
+    + "<div style=\"border:1.5px solid #E7E5E4;border-radius:12px;overflow:hidden;\">"
+    + "<div style=\"background:#F5F5F4;padding:10px 16px;border-bottom:1.5px solid #E7E5E4;\">"
+    + "<p style=\"font-size:11px;font-weight:700;color:#78716C;text-transform:uppercase;letter-spacing:.5px;\">👤 Cliente / Obra</p></div>"
+    + "<div style=\"padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;\">"
+    + "<div><p style=\"font-size:10px;color:#78716C;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;\">Nome</p>"
+    + "<p style=\"font-size:15px;font-weight:700;\">" + (o.clienteNome || "—") + "</p></div>"
+    + telHtml + enderecoHtml
+    + "</div></div>"
+
+    // MATERIAIS
+    + "<div style=\"border:1.5px solid #E7E5E4;border-radius:12px;overflow:hidden;\">"
+    + "<div style=\"background:#F5F5F4;padding:10px 16px;border-bottom:1.5px solid #E7E5E4;\">"
+    + "<p style=\"font-size:11px;font-weight:700;color:#78716C;text-transform:uppercase;letter-spacing:.5px;\">🔧 Materiais</p></div>"
+    + "<div style=\"padding:0 16px 12px;\">" + materiaisHtml + "</div></div>"
+
+    // RESUMO FINANCEIRO
+    + "<div style=\"border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#EA580C,#F97316);\">"
+    + "<div style=\"padding:18px 22px;\">"
+    + "<p style=\"font-size:11px;font-weight:700;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;\">💰 Resumo Financeiro</p>"
+    + "<div style=\"display:flex;flex-direction:column;gap:10px;\">"
+    + "<div style=\"display:flex;justify-content:space-between;align-items:center;\">"
+    + "<p style=\"font-size:14px;color:rgba(255,255,255,.85)\">Materiais</p>"
+    + "<p style=\"font-size:14px;font-weight:700;color:white;\">" + fmtLocal(o.totalMat) + "</p></div>"
+    + "<div style=\"display:flex;justify-content:space-between;align-items:center;\">"
+    + "<p style=\"font-size:14px;color:rgba(255,255,255,.85)\">Mão de obra</p>"
+    + "<p style=\"font-size:14px;font-weight:700;color:white;\">" + fmtLocal(o.moValor) + "</p></div>"
+    + instaladorHtml
+    + "<div style=\"height:1px;background:rgba(255,255,255,.3);margin:4px 0;\"></div>"
+    + "<div style=\"display:flex;justify-content:space-between;align-items:center;\">"
+    + "<p style=\"font-size:20px;font-weight:800;color:white;\">TOTAL GERAL</p>"
+    + "<p style=\"font-size:26px;font-weight:800;color:white;\">" + fmtLocal(o.totalGeral) + "</p>"
+    + "</div></div></div></div>"
+
+    // VERSÍCULO
+    + versiculoHtml
+
+    // RODAPÉ
+    + "<div style=\"margin-top:12px;padding-top:16px;border-top:1px solid #E7E5E4;display:flex;justify-content:space-between;align-items:flex-end;\">"
+    + "<div><p style=\"font-size:11px;color:#78716C;font-weight:600;\">" + (cfg.empresa || "VidraçaPro") + "</p>"
+    + (cfg.celular ? "<p style=\"font-size:11px;color:#78716C;\">" + cfg.celular + "</p>" : "")
+    + "<p style=\"font-size:10px;color:#A8A29E;margin-top:2px;\">Emitido em " + dataHoje + "</p></div>"
+    + "<p style=\"font-size:10px;color:#A8A29E;font-style:italic;text-align:right;\">Este documento é um orçamento<br/>e não tem validade fiscal.</p>"
+    + "</div></div>"
+
+    // BOTÃO IMPRIMIR
+    + "<div class=\"no-print\" style=\"text-align:center;padding:24px 0 36px;\">"
+    + "<button onclick=\"window.print()\" style=\"background:linear-gradient(135deg,#EA580C,#F97316);color:white;border:none;border-radius:12px;padding:14px 44px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(234,88,12,.4);\">"
+    + "🖨️ Imprimir / Salvar como PDF</button></div>"
+    + "</body></html>";
+
+  const w = window.open("", "_blank");
+  if (w) { w.document.write(html); w.document.close(); }
 };
 
 const Orcamentos = () => {
@@ -718,7 +877,7 @@ const Orcamentos = () => {
       <div className="slide-in" style={{ padding: "0 0 80px" }}>
         <div style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, padding: "20px 16px", color: C.white }}>
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <button onClick={() => setView("list")} style={{ background: "rgba(255,255,255,.2)", border: "none", color: C.white, borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 16 }}>←</button>
+            <button onClick={() => setView("list")} style={{ background: "rgba(255,255,255,.2)", border: "none", color: C.white, borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 16 }}>â</button>
             <div style={{ flex: 1 }}>
               <h2 style={{ fontWeight: 800 }}>Or\u00e7amento #{o.numero}</h2>
               <p style={{ fontSize: 13, opacity: .8 }}>{o.clienteNome}</p>
@@ -733,7 +892,7 @@ const Orcamentos = () => {
               <Croqui tipo={o.tipo} folhas={o.folhas} largura={o.largura} altura={o.altura} cor={o.corAl} vidro={o.tipoVidro} />
             </div>
             <p style={{ fontSize: 11, color: C.gray, textAlign: "center", marginTop: 6 }}>
-              {o.tipo} {o.folhas}F • {o.largura}m × {o.altura}m • Al. {o.corAl} • Vidro {o.tipoVidro} {o.espVidro}
+              {o.tipo} {o.folhas}F â¢ {o.largura}m Ã {o.altura}m â¢ Al. {o.corAl} â¢ Vidro {o.tipoVidro} {o.espVidro}
             </p>
           </Card>
           <Card>
@@ -747,7 +906,7 @@ const Orcamentos = () => {
               <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, marginBottom: 8 }}>MATERIAIS</p>
               {o.materiais.map(m => (
                 <div key={m.id} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: `1px solid ${C.grayBorder}`, fontSize: 13 }}>
-                  <span>{m.nome} ({m.qtd}×)</span>
+                  <span>{m.nome} ({m.qtd}Ã)</span>
                   <span style={{ fontWeight: 600 }}>{fmt(m.total)}</span>
                 </div>
               ))}
@@ -769,14 +928,15 @@ const Orcamentos = () => {
             <p style={{ textAlign: "center", fontStyle: "italic", color: C.gray, fontSize: 13, padding: "0 8px" }}>"{cfg.versiculo}"</p>
           )}
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Btn full color="primary" onClick={() => { setSel(o); setView("form"); }}>✏️ Editar</Btn>
+            <Btn full color="primary" onClick={() => { setSel(o); setView("form"); }}>âï¸ Editar</Btn>
             {o.clienteTel && (
               <Btn full color="green" onClick={() => {
-                const msg = `Ol\u00e1 ${o.clienteNome}! Segue o resumo do or\u00e7amento:\n\n${o.tipo} ${o.folhas}F • ${o.largura}m×${o.altura}m\nMateriais: ${fmt(o.totalMat)}\nM\u00e3o de obra: ${fmt(o.moValor)}\n*Total: ${fmt(o.totalGeral)}*\n\n${cfg.empresa || ""}\n${cfg.celular || ""}`;
+                const msg = `Ol\u00e1 ${o.clienteNome}! Segue o resumo do or\u00e7amento:\n\n${o.tipo} ${o.folhas}F â¢ ${o.largura}mÃ${o.altura}m\nMateriais: ${fmt(o.totalMat)}\nM\u00e3o de obra: ${fmt(o.moValor)}\n*Total: ${fmt(o.totalGeral)}*\n\n${cfg.empresa || ""}\n${cfg.celular || ""}`;
                 window.open(`https://wa.me/55${o.clienteTel.replace(/\D/g, "")}?text=${encodeURIComponent(msg)}`, "_blank");
-              }}>💬 WhatsApp</Btn>
+              }}>ð¬ WhatsApp</Btn>
             )}
-            <Btn full color="red" onClick={() => { del(o.id); setView("list"); }}>🗑️ Excluir</Btn>
+            <Btn full color="blue" onClick={() => gerarPDF(o, cfg)}>📄 Gerar PDF</Btn>
+            <Btn full color="red" onClick={() => { del(o.id); setView("list"); }}>ðï¸ Excluir</Btn>
           </div>
         </div>
       </div>
@@ -788,29 +948,29 @@ const Orcamentos = () => {
       <div style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, padding: "24px 20px 20px", color: C.white, marginBottom: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 800 }}>📋 Orçamentos</h1>
-            <p style={{ fontSize: 13, opacity: .85, marginTop: 4 }}>{lista.length} orçamento{lista.length !== 1 ? "s" : ""}</p>
+            <h1 style={{ fontSize: 22, fontWeight: 800 }}>ð OrÃ§amentos</h1>
+            <p style={{ fontSize: 13, opacity: .85, marginTop: 4 }}>{lista.length} orÃ§amento{lista.length !== 1 ? "s" : ""}</p>
           </div>
           <button onClick={() => { setSel(null); setView("form"); }}
             style={{ background: "rgba(255,255,255,.2)", border: "2px solid rgba(255,255,255,.5)", color: C.white, borderRadius: 10, padding: "8px 14px", cursor: "pointer", fontWeight: 700, fontSize: 20 }}>+</button>
         </div>
       </div>
       <div style={{ padding: "0 16px", display: "flex", flexDirection: "column", gap: 10 }}>
-        <input value={busca} onChange={e => setBusca(e.target.value)} placeholder="🔍 Buscar por cliente ou nº..."
+        <input value={busca} onChange={e => setBusca(e.target.value)} placeholder="ð Buscar por cliente ou nÂº..."
           style={{ padding: "11px 14px", borderRadius: 10, border: `1.5px solid ${C.grayBorder}`, fontSize: 14, background: C.white }} />
         {filtrados.length === 0 ? (
-          <EmptyState icon="📋" text="Nenhum orçamento ainda." action={<Btn onClick={() => setView("form")}>+ Novo Orçamento</Btn>} />
+          <EmptyState icon="ð" text="Nenhum orÃ§amento ainda." action={<Btn onClick={() => setView("form")}>+ Novo OrÃ§amento</Btn>} />
         ) : filtrados.map(o => (
           <Card key={o.id} onClick={() => { setSel(o); setView("detail"); }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
               <div>
                 <p style={{ fontWeight: 700, fontSize: 15 }}>{o.clienteNome || "Sem nome"}</p>
-                <p style={{ fontSize: 12, color: C.gray }}>#{o.numero} • {o.tipo} {o.folhas}F • {o.largura}×{o.altura}m</p>
+                <p style={{ fontSize: 12, color: C.gray }}>#{o.numero} â¢ {o.tipo} {o.folhas}F â¢ {o.largura}Ã{o.altura}m</p>
               </div>
               <StatusBadge s={o.status} />
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <p style={{ fontSize: 12, color: C.gray }}>Al. {o.corAl} • Vidro {o.tipoVidro}</p>
+              <p style={{ fontSize: 12, color: C.gray }}>Al. {o.corAl} â¢ Vidro {o.tipoVidro}</p>
               <p style={{ fontWeight: 800, color: C.primary, fontSize: 16 }}>{fmt(o.totalGeral)}</p>
             </div>
           </Card>
@@ -820,7 +980,7 @@ const Orcamentos = () => {
   );
 };
 
-// ─── TELA: FINANCEIRO ─────────────────────────────────────────────────────────
+// âââ TELA: FINANCEIRO âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const Financeiro = () => {
   const [lista, setLista] = useState(DB.getAll("financeiro"));
   const [modal, setModal] = useState(false);
@@ -861,7 +1021,7 @@ const Financeiro = () => {
       <div style={{ background: `linear-gradient(135deg, ${C.primary}, ${C.primary2})`, padding: "24px 20px 20px", color: C.white, marginBottom: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 800 }}>💰 Financeiro</h1>
+            <h1 style={{ fontSize: 22, fontWeight: 800 }}>ð° Financeiro</h1>
             <p style={{ fontSize: 13, opacity: .85, marginTop: 4 }}>Controle de caixa</p>
           </div>
           <button onClick={() => setModal(true)}
@@ -875,7 +1035,7 @@ const Financeiro = () => {
             <p style={{ fontSize: 18, fontWeight: 800, color: C.green, marginTop: 4 }}>{fmt(entradas)}</p>
           </Card>
           <Card style={{ background: "#FEE2E2" }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: C.red, textTransform: "uppercase" }}>Saídas</p>
+            <p style={{ fontSize: 11, fontWeight: 700, color: C.red, textTransform: "uppercase" }}>SaÃ­das</p>
             <p style={{ fontSize: 18, fontWeight: 800, color: C.red, marginTop: 4 }}>{fmt(saidas)}</p>
           </Card>
         </div>
@@ -884,7 +1044,7 @@ const Financeiro = () => {
           <p style={{ fontSize: 26, fontWeight: 800, marginTop: 4 }}>{fmt(saldo)}</p>
         </Card>
         <Card>
-          <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, marginBottom: 12 }}>ÚLTIMOS 4 MESES</p>
+          <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, marginBottom: 12 }}>ÃLTIMOS 4 MESES</p>
           <div style={{ display: "flex", alignItems: "flex-end", gap: 10, height: 80 }}>
             {meses.map((m, i) => (
               <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
@@ -897,12 +1057,12 @@ const Financeiro = () => {
             ))}
           </div>
           <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
-            <span style={{ fontSize: 11, color: C.green }}>■ Entradas</span>
-            <span style={{ fontSize: 11, color: C.red }}>■ Saídas</span>
+            <span style={{ fontSize: 11, color: C.green }}>â  Entradas</span>
+            <span style={{ fontSize: 11, color: C.red }}>â  SaÃ­das</span>
           </div>
         </Card>
         <div style={{ display: "flex", gap: 6 }}>
-          {[["todos", "Todos"], ["entrada", "Entradas"], ["saida", "Saídas"]].map(([k, l]) => (
+          {[["todos", "Todos"], ["entrada", "Entradas"], ["saida", "SaÃ­das"]].map(([k, l]) => (
             <button key={k} onClick={() => setFiltro(k)} style={{
               flex: 1, padding: "7px", borderRadius: 8, border: `2px solid ${filtro === k ? C.primary : C.grayBorder}`,
               background: filtro === k ? C.primary3 : C.white, color: filtro === k ? C.primary : C.dark, fontWeight: 600, cursor: "pointer", fontSize: 12,
@@ -910,28 +1070,28 @@ const Financeiro = () => {
           ))}
         </div>
         {filtrados.length === 0 ? (
-          <EmptyState icon="💰" text="Nenhum lançamento ainda." action={<Btn onClick={() => setModal(true)}>+ Novo Lançamento</Btn>} />
+          <EmptyState icon="ð°" text="Nenhum lanÃ§amento ainda." action={<Btn onClick={() => setModal(true)}>+ Novo LanÃ§amento</Btn>} />
         ) : filtrados.map(x => (
           <Card key={x.id} style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 36, height: 36, borderRadius: "50%", background: x.tipo === "entrada" ? "#DCFCE7" : "#FEE2E2", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>
-              {x.tipo === "entrada" ? "↑" : "↓"}
+              {x.tipo === "entrada" ? "â" : "â"}
             </div>
             <div style={{ flex: 1 }}>
               <p style={{ fontWeight: 600, fontSize: 14 }}>{x.descricao}</p>
-              <p style={{ fontSize: 11, color: C.gray }}>{new Date(x.data).toLocaleDateString("pt-BR")} • {x.status || ""}</p>
+              <p style={{ fontSize: 11, color: C.gray }}>{new Date(x.data).toLocaleDateString("pt-BR")} â¢ {x.status || ""}</p>
             </div>
             <p style={{ fontWeight: 800, fontSize: 15, color: x.tipo === "entrada" ? C.green : C.red }}>
               {x.tipo === "entrada" ? "+" : "-"}{fmt(x.valor)}
             </p>
-            <button onClick={() => del(x.id)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 16, color: C.gray }}>✕</button>
+            <button onClick={() => del(x.id)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 16, color: C.gray }}>â</button>
           </Card>
         ))}
       </div>
       {modal && (
-        <Modal title="Novo Lançamento" onClose={() => setModal(false)}>
+        <Modal title="Novo LanÃ§amento" onClose={() => setModal(false)}>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ display: "flex", gap: 8 }}>
-              {[["entrada", "↑ Entrada"], ["saida", "↓ Saída"]].map(([k, l]) => (
+              {[["entrada", "â Entrada"], ["saida", "â SaÃ­da"]].map(([k, l]) => (
                 <button key={k} onClick={() => setForm(f => ({ ...f, tipo: k }))} style={{
                   flex: 1, padding: "10px", borderRadius: 8, border: `2px solid ${form.tipo === k ? (k === "entrada" ? C.green : C.red) : C.grayBorder}`,
                   background: form.tipo === k ? (k === "entrada" ? "#DCFCE7" : "#FEE2E2") : C.white, cursor: "pointer", fontWeight: 700, fontSize: 14,
@@ -939,7 +1099,7 @@ const Financeiro = () => {
                 }}>{l}</button>
               ))}
             </div>
-            <Input label="Descrição" value={form.descricao} onChange={v => setForm(f => ({ ...f, descricao: v }))} required />
+            <Input label="DescriÃ§Ã£o" value={form.descricao} onChange={v => setForm(f => ({ ...f, descricao: v }))} required />
             <Input label="Valor (R$)" value={form.valor} onChange={v => setForm(f => ({ ...f, valor: v }))} type="number" required />
             <Input label="Data" value={form.data} onChange={v => setForm(f => ({ ...f, data: v }))} type="date" />
             <Select label="Status" value={form.status} onChange={v => setForm(f => ({ ...f, status: v }))}
@@ -955,7 +1115,7 @@ const Financeiro = () => {
   );
 };
 
-// ─── TELA: HOME ───────────────────────────────────────────────────────────────
+// âââ TELA: HOME âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const Home = ({ setPage }) => {
   const cfg = DB.get("config") || {};
   const orcamentos = DB.getAll("orcamentos");
@@ -976,7 +1136,7 @@ const Home = ({ setPage }) => {
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20, position: "relative" }}>
           {cfg.logo
             ? <img src={cfg.logo} style={{ width: 52, height: 52, borderRadius: 12, objectFit: "contain", background: C.white, padding: 4 }} alt="logo" />
-            : <div style={{ width: 52, height: 52, borderRadius: 12, background: "rgba(255,255,255,.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>🪟</div>}
+            : <div style={{ width: 52, height: 52, borderRadius: 12, background: "rgba(255,255,255,.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>ðª</div>}
           <div>
             <h1 style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.2 }}>{cfg.empresa || "Vidra\u00e7aPro"}</h1>
             <p style={{ fontSize: 12, opacity: .8, marginTop: 2 }}>{cfg.celular || "Configure sua empresa"}</p>
@@ -984,9 +1144,9 @@ const Home = ({ setPage }) => {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, position: "relative" }}>
           {[
-            { icon: "📋", val: orcamentos.length, label: "Or\u00e7amentos" },
-            { icon: "👥", val: clientes.length, label: "Clientes" },
-            { icon: "🔧", val: pendentes, label: "Em andamento" },
+            { icon: "ð", val: orcamentos.length, label: "Or\u00e7amentos" },
+            { icon: "ð¥", val: clientes.length, label: "Clientes" },
+            { icon: "ð§", val: pendentes, label: "Em andamento" },
           ].map(s => (
             <div key={s.label} style={{ background: "rgba(255,255,255,.18)", borderRadius: 12, padding: "10px 8px", textAlign: "center" }}>
               <div style={{ fontSize: 20 }}>{s.icon}</div>
@@ -1003,17 +1163,17 @@ const Home = ({ setPage }) => {
             {fmt(entradas - saidas)}
           </p>
           <div style={{ display: "flex", gap: 16, marginTop: 8 }}>
-            <span style={{ fontSize: 12, color: C.green }}>↑ {fmt(entradas)}</span>
-            <span style={{ fontSize: 12, color: C.red }}>↓ {fmt(saidas)}</span>
+            <span style={{ fontSize: 12, color: C.green }}>â {fmt(entradas)}</span>
+            <span style={{ fontSize: 12, color: C.red }}>â {fmt(saidas)}</span>
           </div>
         </Card>
-        <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: .5 }}>Ações Rápidas</p>
+        <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: .5 }}>AÃ§Ãµes RÃ¡pidas</p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
           {[
-            { icon: "📋", label: "Novo Or\u00e7amento", page: "orcamentos", color: C.primary },
-            { icon: "👥", label: "Clientes", page: "clientes", color: "#7C3AED" },
-            { icon: "💰", label: "Financeiro", page: "financeiro", color: C.green },
-            { icon: "⚙️", label: "Configura\u00e7\u00f5es", page: "config", color: C.gray },
+            { icon: "ð", label: "Novo Or\u00e7amento", page: "orcamentos", color: C.primary },
+            { icon: "ð¥", label: "Clientes", page: "clientes", color: "#7C3AED" },
+            { icon: "ð°", label: "Financeiro", page: "financeiro", color: C.green },
+            { icon: "âï¸", label: "Configura\u00e7\u00f5es", page: "config", color: C.gray },
           ].map(a => (
             <button key={a.label} onClick={() => setPage(a.page)} style={{
               background: C.white, borderRadius: 14, padding: "16px 12px", border: `2px solid ${C.grayBorder}`,
@@ -1031,14 +1191,14 @@ const Home = ({ setPage }) => {
           <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <p style={{ fontSize: 12, fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: .5 }}>Recentes</p>
-              <button onClick={() => setPage("orcamentos")} style={{ fontSize: 12, color: C.primary, background: "none", border: "none", cursor: "pointer", fontWeight: 600 }}>Ver todos →</button>
+              <button onClick={() => setPage("orcamentos")} style={{ fontSize: 12, color: C.primary, background: "none", border: "none", cursor: "pointer", fontWeight: 600 }}>Ver todos â</button>
             </div>
             {orcamentos.slice(0, 3).map(o => (
               <Card key={o.id} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, background: C.primary3, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>🪟</div>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: C.primary3, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>ðª</div>
                 <div style={{ flex: 1 }}>
                   <p style={{ fontWeight: 700, fontSize: 14 }}>{o.clienteNome}</p>
-                  <p style={{ fontSize: 12, color: C.gray }}>#{o.numero} • {o.tipo}</p>
+                  <p style={{ fontSize: 12, color: C.gray }}>#{o.numero} â¢ {o.tipo}</p>
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <p style={{ fontWeight: 800, color: C.primary }}>{fmt(o.totalGeral)}</p>
@@ -1050,7 +1210,7 @@ const Home = ({ setPage }) => {
         )}
         {cfg.versiculo && (
           <Card style={{ background: `linear-gradient(135deg, #FFF7ED, ${C.primary3})`, border: `1px solid ${C.primary3}`, textAlign: "center" }}>
-            <p style={{ fontSize: 13, fontStyle: "italic", color: C.primary, lineHeight: 1.5 }}>✝️ {cfg.versiculo}</p>
+            <p style={{ fontSize: 13, fontStyle: "italic", color: C.primary, lineHeight: 1.5 }}>âï¸ {cfg.versiculo}</p>
           </Card>
         )}
       </div>
@@ -1058,16 +1218,16 @@ const Home = ({ setPage }) => {
   );
 };
 
-// ─── BOTTOM NAV ───────────────────────────────────────────────────────────────
+// âââ BOTTOM NAV âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const NAV = [
-  { id: "home", icon: "🏠", label: "Início" },
-  { id: "orcamentos", icon: "📋", label: "Orçamentos" },
-  { id: "clientes", icon: "👥", label: "Clientes" },
-  { id: "financeiro", icon: "💰", label: "Financeiro" },
-  { id: "config", icon: "⚙️", label: "Config" },
+  { id: "home", icon: "ð ", label: "InÃ­cio" },
+  { id: "orcamentos", icon: "ð", label: "OrÃ§amentos" },
+  { id: "clientes", icon: "ð¥", label: "Clientes" },
+  { id: "financeiro", icon: "ð°", label: "Financeiro" },
+  { id: "config", icon: "âï¸", label: "Config" },
 ];
 
-// ─── APP ROOT ─────────────────────────────────────────────────────────────────
+// âââ APP ROOT âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 export default function App() {
   const [page, setPage] = useState("home");
 
@@ -1075,7 +1235,7 @@ export default function App() {
     <>
       <style>{globalStyle}</style>
       <div style={{ maxWidth: 480, margin: "0 auto", minHeight: "100vh", background: C.grayLight, position: "relative" }}>
-        {/* conteúdo */}
+        {/* conteÃºdo */}
         <div style={{ paddingBottom: 66 }}>
           {page === "home" && <Home setPage={setPage} />}
           {page === "orcamentos" && <Orcamentos />}
