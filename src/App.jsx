@@ -61,12 +61,12 @@ const Btn = ({ children, onClick, color = "primary", size = "md", full, outline,
   return <button style={base} onClick={disabled ? undefined : onClick}>{children}</button>;
 };
 
-const Input = ({ label, value, onChange, type = "text", placeholder, required, suffix, small }) => (
+const Input = ({ label, value, onChange, type = "text", inputMode, placeholder, required, suffix, small }) => (
   <div style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
     {label && <label style={{ fontSize: 12, fontWeight: 600, color: C.gray, textTransform: "uppercase", letterSpacing: .5 }}>{label}{required && <span style={{ color: C.primary }}> *</span>}</label>}
     <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
       <input
-        type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
+        type={type} inputMode={inputMode} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={{
           width: "100%", padding: small ? "8px 12px" : "11px 14px", borderRadius: 8,
           border: `1.5px solid ${C.grayBorder}`, fontSize: small ? 13 : 14, background: C.white,
@@ -148,7 +148,9 @@ const EmptyState = ({ icon, text, action }) => (
 const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
   const W = 280, H = 200, pad = 30, fw = 8;
   const iW = W - pad * 2, iH = H - pad * 2;
-  const numFolhas = parseInt(folhas) || 2;
+  const numFolhas = Math.max(1, parseInt(folhas) || 2);
+  const dimL = (largura || "0").replace(",", ".");
+  const dimA = (altura || "0").replace(",", ".");
 
   const renderPorta = () => {
     const fW = iW / numFolhas;
@@ -176,9 +178,9 @@ const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
           );
         })}
         <line x1={pad} y1={H - 8} x2={W - pad} y2={H - 8} stroke={C.gray} strokeWidth={1} markerEnd="url(#arr)" />
-        <text x={W / 2} y={H - 1} textAnchor="middle" fontSize={9} fill={C.gray}>{largura || "0"} m</text>
+        <text x={W / 2} y={H - 1} textAnchor="middle" fontSize={9} fill={C.gray}>{dimL} m</text>
         <line x1={W - 8} y1={pad} x2={W - 8} y2={H - pad} stroke={C.gray} strokeWidth={1} />
-        <text x={W - 2} y={H / 2} textAnchor="middle" fontSize={9} fill={C.gray} transform={`rotate(-90,${W - 2},${H / 2})`}>{altura || "0"} m</text>
+        <text x={W - 2} y={H / 2} textAnchor="middle" fontSize={9} fill={C.gray} transform={`rotate(-90,${W - 2},${H / 2})`}>{dimA} m</text>
       </g>
     );
   };
@@ -204,9 +206,9 @@ const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
           );
         })}
         <line x1={pad} y1={H - 8} x2={W - pad} y2={H - 8} stroke={C.gray} strokeWidth={1} />
-        <text x={W / 2} y={H - 1} textAnchor="middle" fontSize={9} fill={C.gray}>{largura || "0"} m</text>
+        <text x={W / 2} y={H - 1} textAnchor="middle" fontSize={9} fill={C.gray}>{dimL} m</text>
         <line x1={W - 8} y1={pad} x2={W - 8} y2={H - pad} stroke={C.gray} strokeWidth={1} />
-        <text x={W - 2} y={H / 2} textAnchor="middle" fontSize={9} fill={C.gray} transform={`rotate(-90,${W - 2},${H / 2})`}>{altura || "0"} m</text>
+        <text x={W - 2} y={H / 2} textAnchor="middle" fontSize={9} fill={C.gray} transform={`rotate(-90,${W - 2},${H / 2})`}>{dimA} m</text>
       </g>
     );
   };
@@ -220,7 +222,7 @@ const Croqui = ({ tipo, folhas, largura, altura, cor, vidro }) => {
         return <rect key={i} x={x - 5} y={pad + 20} width={10} height={H - pad * 2 - 30} fill={C.primary2} rx={3} />;
       })}
       <rect x={pad + 5} y={pad + 32} width={iW - 10} height={H - pad * 2 - 62} fill="rgba(186,230,253,.5)" stroke="#93C5FD" strokeWidth={1} />
-      <text x={W / 2} y={H - 4} textAnchor="middle" fontSize={9} fill={C.gray}>{largura || "0"} m comprimento</text>
+      <text x={W / 2} y={H - 4} textAnchor="middle" fontSize={9} fill={C.gray}>{dimL} m comprimento</text>
     </g>
   );
 
@@ -547,8 +549,8 @@ const OrcamentoForm = ({ onSave, onCancel, inicial }) => {
             <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <p style={{ fontSize: 12, fontWeight: 700, color: C.gray }}>DIMENSÃES</p>
               <div style={{ display: "flex", gap: 10 }}>
-                <Input label="Largura" value={o.largura} onChange={v => setO(x => ({ ...x, largura: v }))} type="number" suffix="m" />
-                <Input label="Altura" value={o.altura} onChange={v => setO(x => ({ ...x, altura: v }))} type="number" suffix="m" />
+                <Input label="Largura" value={o.largura} onChange={v => setO(x => ({ ...x, largura: v }))} type="text" inputMode="decimal" suffix="m" />
+                <Input label="Altura" value={o.altura} onChange={v => setO(x => ({ ...x, altura: v }))} type="text" inputMode="decimal" suffix="m" />
               </div>
             </Card>
             <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
